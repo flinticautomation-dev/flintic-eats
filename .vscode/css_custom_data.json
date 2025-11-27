@@ -1,0 +1,13 @@
+{
+    "version": 1.1,
+    "atDirectives": [
+        {
+            "name": "@theme",
+            "description": "Tailwind CSS v4 theme configuration directive. Used to define custom design tokens and theme values."
+        },
+        {
+            "name": "@import",
+            "description": "Tailwind CSS v4 import directive. Imports Tailwind CSS utilities and base styles."
+        }
+    ]
+}
