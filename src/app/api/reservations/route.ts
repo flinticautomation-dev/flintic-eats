@@ -39,9 +39,11 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Failed to check availability' }, { status: 500 })
         }
 
-        const MAX_CAPACITY_PER_SLOT = 10
-        if (count !== null && count >= MAX_CAPACITY_PER_SLOT) {
-            return NextResponse.json({ error: 'Time slot fully booked' }, { status: 409 })
+        // Only allow 1 booking per time slot
+        if (count !== null && count > 0) {
+            return NextResponse.json({
+                error: 'This time slot is already booked. Please select another time.'
+            }, { status: 409 })
         }
 
         // Create reservation

@@ -27,10 +27,14 @@ export async function GET(request: Request) {
             return NextResponse.json({ error: 'Failed to check availability' }, { status: 500 })
         }
 
-        const MAX_CAPACITY_PER_SLOT = 10 // Arbitrary limit
-        const available = count !== null && count < MAX_CAPACITY_PER_SLOT
+        // Only allow 1 booking per time slot
+        const available = count === 0
 
-        return NextResponse.json({ available, remaining: MAX_CAPACITY_PER_SLOT - (count || 0) })
+        return NextResponse.json({
+            available,
+            remaining: available ? 1 : 0,
+            message: available ? 'Time slot available' : 'This time slot is already booked'
+        })
     } catch (error) {
         console.error('Unexpected error:', error)
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

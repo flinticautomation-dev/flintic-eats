@@ -85,7 +85,7 @@ export default function ReservePage() {
             if (data.available) {
                 setStep(2)
             } else {
-                setError('Sorry, this time slot is fully booked.')
+                setError(data.message || 'Sorry, this time slot is already booked. Please select another time.')
             }
         } catch (err) {
             console.error(err)
